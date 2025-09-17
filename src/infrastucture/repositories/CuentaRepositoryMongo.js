@@ -25,8 +25,19 @@ class CuentaRepositoryMongo {
       return await CuentaModel.findById(id);
     }
 
+
+
+
     async update(id, cuentaData) {
-      return await CuentaModel.findByIdAndUpdate(id, cuentaData, { new: true });
+      const {nroTiquetera, cliente, saldo, totalTransacciones}=cuentaData
+
+
+      function suma (total) { parseInt(total+1)} ;
+      const totalSuma = suma(totalTransacciones)
+      console.log(totalSuma)                                 
+
+
+      return await CuentaModel.findByIdAndUpdate(id,({nroTiquetera, cliente, saldo, totalTransacciones}), { new: true });   // para que la api funcione normalmente (sin intentos  de autoincrementar) cambie en esta linea "totalSuma" por "totalTransacciones"
     }
 
     async delete(id) {

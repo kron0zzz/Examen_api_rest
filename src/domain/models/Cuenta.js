@@ -3,7 +3,7 @@ class Cuenta {
         this.nroTiquetera = nroTiquetera;
         this.cliente = cliente;
         this.saldo = saldo;
-        this.totalTransacciones = totalTransacciones;
+        this.totalTransacciones = totalTransacciones+1;
     }
 }
 
