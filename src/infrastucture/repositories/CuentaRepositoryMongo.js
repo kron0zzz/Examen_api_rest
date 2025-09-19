@@ -4,7 +4,8 @@ const CuentaSchema = new mongoose.Schema({
     nroTiquetera: String,
     cliente: String,
     saldo: Number,
-    totalTransacciones: Number 
+    totalTransacciones: Number,
+    observaciones: String
     
   });
 
@@ -29,15 +30,8 @@ class CuentaRepositoryMongo {
 
 
     async update(id, cuentaData) {
-      const {nroTiquetera, cliente, saldo, totalTransacciones}=cuentaData
-
-
-      function suma (total) { parseInt(total+1)} ;
-      const totalSuma = suma(totalTransacciones)
-      console.log(totalSuma)                                 
-
-
-      return await CuentaModel.findByIdAndUpdate(id,({nroTiquetera, cliente, saldo, totalTransacciones}), { new: true });   // para que la api funcione normalmente (sin intentos  de autoincrementar) cambie en esta linea "totalSuma" por "totalTransacciones"
+      const {nroTiquetera, cliente, saldo, totalTransacciones, observaciones}=cuentaData
+      return await CuentaModel.findByIdAndUpdate(id,({nroTiquetera, cliente, saldo, $inc: {totalTransacciones: 1 }, observaciones}), { new: true });   // para que la api funcione normalmente (sin intentos  de autoincrementar) cambie en esta linea "totalSuma" por "totalTransacciones"
     }
 
     async delete(id) {
